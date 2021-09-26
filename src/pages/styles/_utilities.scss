@@ -1,0 +1,74 @@
+@import "display_styles_mixins.scss";
+
+@mixin paddingY($x, $y) {
+  padding-top: $x;
+  padding-bottom: $y;
+}
+
+@mixin paddingX($left, $right) {
+  padding-left: $left;
+  padding-right: $right;
+}
+
+@mixin marginY($x, $y) {
+  margin-top: $x;
+  margin-bottom: $y;
+}
+
+@mixin marginX($left, $right) {
+  margin-left: $left;
+  margin-right: $right;
+}
+
+.display-on-phone {
+  display: none !important;
+  @include for-phones {
+    display: block !important;
+    &.d-flex {
+      display: flex !important;
+    }
+  }
+}
+
+.display-not-on-phone {
+  @include for-phones {
+    display: none !important;
+  }
+}
+
+.bg-red {
+  background: #f23d4b;
+}
+.color-red {
+  color: #f23d4b;
+}
+
+@font-face {
+  font-family: "Google Sans";
+  src: url("../../assets/fonts/googleSans/Regular-Thin.woff2") format("woff2");
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Google Sans";
+  src: url("../../assets/fonts/googleSans/Regular.woff2") format("woff2");
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Google Sans";
+  src: url("../../assets/fonts/googleSans/Medium.woff2") format("woff2");
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Google Sans";
+  src: url("../../assets/fonts/googleSans/Bold.woff2") format("woff2");
+  font-weight: 800;
+}
+
+@font-face {
+  font-family: "Google Sans";
+  src: url("../../assets/fonts/googleSans/Bolder.woff2") format("woff2");
+  font-weight: 1000;
+}

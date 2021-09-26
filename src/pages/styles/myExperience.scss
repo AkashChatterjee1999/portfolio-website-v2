@@ -1,0 +1,41 @@
+@import "utilities.scss";
+@import "display_styles_mixins.scss";
+
+.my-experience-section {
+  background: #222b35;
+  display: block;
+  color: white;
+  overflow-x: hidden;
+  .heading {
+    font-family: "Google Sans";
+    font-size: 40px;
+    font-weight: 800;
+    @include marginY(auto, auto);
+    @include marginX(auto, auto);
+  }
+  .my-experience-text {
+    font-family: "Google Sans";
+    font-size: 16.5px;
+    max-width: 700px;
+    @include marginY(auto, auto);
+    @include marginX(unset, auto);
+    @include for-phones {
+      font-size: 12.5px;
+    }
+  }
+  .vertical-timeline-element-date {
+    @include marginX(20px, 20px);
+  }
+  .experiences-container {
+    display: flex;
+    flex-direction: column;
+    // height: 100vh;
+    // overflow-y: scroll;
+    // @include for-phones {
+    //   height: 90vh;
+    // }
+  }
+  ::-webkit-scrollbar {
+    display: none;
+  }
+}

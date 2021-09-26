@@ -1,0 +1,62 @@
+@import "utilities.scss";
+@import "display_styles_mixins.scss";
+
+.about-me-section {
+  background: #0f0f0f; //#222b35;
+  display: block;
+  color: white;
+  overflow-x: hidden;
+  .heading {
+    font-family: "Google Sans";
+    font-size: 40px;
+    font-weight: 800;
+    @include marginY(auto, auto);
+    @include marginX(auto, auto);
+  }
+  .about-me-container {
+    display: flex;
+    flex-direction: column;
+    // height: 100vh;
+    // overflow-y: scroll;
+    // @include for-phones {
+    //   height: 90vh;
+    // }
+
+    .experience-tool-row {
+      @include paddingY(1.5rem, 1.5rem);
+      justify-content: space-between;
+      @include for-phones {
+        @include paddingY(0.75rem, 0.75rem);
+      }
+    }
+  }
+  .about-me-text {
+    font-family: "Google Sans";
+    font-size: 16.5px;
+    max-width: 700px;
+    font-weight: 400;
+    @include marginY(auto, auto);
+    @include marginX(unset, auto);
+    @include for-phones {
+      font-size: 12.5px;
+    }
+  }
+  .experience-heading {
+    font-size: 22px;
+    font-family: "Google Sans";
+    font-weight: 800;
+    @include for-phones {
+      font-size: 16px;
+    }
+  }
+  .experience-icon {
+    @include marginX(auto, auto);
+    @include marginY(auto, auto);
+    width: 80px;
+    height: 80px;
+    @include for-phones {
+      width: 40px;
+      height: 40px;
+    }
+  }
+}
