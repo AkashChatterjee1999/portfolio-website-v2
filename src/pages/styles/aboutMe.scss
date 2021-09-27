@@ -12,6 +12,15 @@
     font-weight: 800;
     @include marginY(auto, auto);
     @include marginX(auto, auto);
+    @include for-phones {
+      font-family: "Sarabun";
+      font-size: 30px;
+    }
+    &.bg-red {
+      @include for-phones {
+        background-color: transparent;
+      }
+    }
   }
   .about-me-container {
     display: flex;

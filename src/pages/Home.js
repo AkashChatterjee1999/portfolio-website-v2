@@ -21,7 +21,7 @@ class Home extends React.Component {
                 I am a&nbsp;
                 <Typical
                   className="bg-red"
-                  steps={["Full Stack Developer.", 1500, "Devops Engineer.", 1500, "Competitve Coder.", 1500]}
+                  steps={["Full Stack Developer.", 1500, "DevOps Engineer.", 1500, "Competitve Coder.", 1500]}
                   loop={Infinity}
                   wrapper={"span"}
                 />

@@ -2,7 +2,7 @@
 @import "display_styles_mixins.scss";
 
 .my-experience-section {
-  background: #222b35;
+  background: #0f0f0f; //222b35;
   display: block;
   color: white;
   overflow-x: hidden;
@@ -12,6 +12,10 @@
     font-weight: 800;
     @include marginY(auto, auto);
     @include marginX(auto, auto);
+    @include for-phones {
+      font-family: "Sarabun";
+      font-size: 30px;
+    }
   }
   .my-experience-text {
     font-family: "Google Sans";

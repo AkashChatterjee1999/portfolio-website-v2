@@ -34,10 +34,10 @@ class MyExperience extends React.Component {
   render() {
     return (
       <section className="my-experience-section">
-        <Row>
+        <Row style={{ minHeight: "100vh" }}>
           {/*</section>style={{ height: "100vh", overflow: "hidden" }}>*/}
           <Col md={4} className="d-flex flex-column display-on-phone">
-            <p className="heading bg-red p-2">My Experiences</p>
+            <p className="heading p-2">My Experiences</p>
           </Col>
           <Col md={8} className="experiences-container py-3">
             <Container fluid className="m-auto">

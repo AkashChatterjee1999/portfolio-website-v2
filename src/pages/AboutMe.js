@@ -99,7 +99,7 @@ class AboutMe extends React.Component {
   }
   render() {
     return (
-      <section className="about-me-section">
+      <section className="about-me-section py-2">
         <Row>
           {/* <Row> style={{ height: "100vh", overflow: "hidden" }}> */}
           <Col md={5} className="d-flex flex-column">
@@ -123,7 +123,7 @@ class AboutMe extends React.Component {
               <br />
               <p className="my-3">
                 These are some of the technologies i have used during my experience and i am comfortable with. Though i am open to learn new
-                technologies and also keen tio learn any things.
+                technologies and also keen to learn any new things.
               </p>
             </div>
           </Col>

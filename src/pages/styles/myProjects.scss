@@ -1,0 +1,20 @@
+@import "utilities.scss";
+@import "display_styles_mixins.scss";
+
+.my-projects-section {
+  background: #0f0f0f; //222b35;
+  display: block;
+  color: white;
+  overflow-x: hidden;
+  .heading {
+    font-family: "Google Sans";
+    font-size: 40px;
+    font-weight: 800;
+    @include marginY(auto, auto);
+    @include marginX(auto, auto);
+    @include for-phones {
+      font-family: "Sarabun";
+      font-size: 30px;
+    }
+  }
+}
