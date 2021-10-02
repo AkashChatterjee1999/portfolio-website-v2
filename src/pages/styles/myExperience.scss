@@ -27,6 +27,35 @@
       font-size: 12.5px;
     }
   }
+  .vertical-timeline-element-title {
+    font-size: 20px;
+  }
+  .vertical-timeline-element-subtitle {
+    font-size: 16px;
+  }
+  .vertical-timeline-element-text {
+    font-size: 13px;
+  }
+  .vertical-timeline-element-icon {
+    width: 15px !important;
+    height: 15px !important;
+    margin-left: -7.5px !important;
+    margin-top: 20px !important;
+    background: #f23d4b;
+    color: #fff;
+    @include for-tablets {
+      width: 10px !important;
+      height: 10px !important;
+      margin-left: 15px !important;
+      margin-top: 20px !important;
+    }
+    @include for-phones {
+      width: 10px !important;
+      height: 10px !important;
+      margin-left: 15px !important;
+      margin-top: 20px !important;
+    }
+  }
   .vertical-timeline-element-date {
     @include marginX(20px, 20px);
   }

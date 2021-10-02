@@ -14,7 +14,7 @@ class MyExperience extends React.Component {
           postCompany: "Bobble.ai",
           postDate: "2020 Jul - 2021 Feb",
           post: "Full Stack Intern",
-          description: "Worked in mint microservices migration and bobble.ai website code migration from angular.js to next.js.",
+          description: "Worked in mint microservices migration and \n bobble.ai website code migration from angular.js to next.js.",
         },
         {
           postCompany: "Microfinance.ai",
@@ -40,19 +40,18 @@ class MyExperience extends React.Component {
             <p className="heading p-2">My Experiences</p>
           </Col>
           <Col md={8} className="experiences-container py-3">
-            <Container fluid className="m-auto">
+            <Container fluid className="m-auto" style={{ maxWidth: "700px" }}>
               <VerticalTimeline>
                 {this.state.experiences.map((experience) => {
                   return (
                     <VerticalTimelineElement
                       className="vertical-timeline-element--work"
-                      contentStyle={{ background: "#f23d4b", color: "#fff" }}
+                      contentStyle={{ background: "transparent", color: "#fff" }}
                       contentArrowStyle={{ borderRight: "7px solid  #f23d4b" }}
-                      date={experience.postDate}
-                      iconStyle={{ background: "#f23d4b", color: "#fff" }}>
+                      date={experience.postDate}>
                       <h3 className="vertical-timeline-element-title">{experience.postCompany}</h3>
                       <h4 className="vertical-timeline-element-subtitle">{experience.post}</h4>
-                      <p>{experience.description}</p>
+                      <p className="vertical-timeline-element-text">{experience.description}</p>
                     </VerticalTimelineElement>
                   );
                 })}
