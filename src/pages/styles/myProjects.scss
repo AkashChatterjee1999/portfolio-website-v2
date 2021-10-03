@@ -6,6 +6,16 @@
   display: block;
   color: white;
   overflow-x: hidden;
+  // .heading {
+  //   font-family: "Google Sans";
+  //   font-size: 40px;
+  //   font-weight: 800;
+  //   @include marginY(auto, auto);
+  //   @include marginX(auto, auto);
+  //   @include for-phones {
+  //     font-family: "Sarabun";
+  //     font-size: 30px;
+  //   }
   .heading {
     font-family: "Google Sans";
     font-size: 40px;
@@ -16,7 +26,40 @@
       font-family: "Sarabun";
       font-size: 30px;
     }
+    &.bg-red {
+      @include for-phones {
+        background-color: transparent;
+      }
+    }
+  }
+  .project-category-desc {
+    font-size: 14px;
+    @include for-phones {
+      font-family: "Sarabun";
+      font-size: 12px;
+    }
   }
   .my-projects-container {
+    max-width: 300px;
+    @include for-phones {
+      max-width: 100%;
+      @include paddingY(1.5rem, 1.5rem);
+    }
+
+    .project-card-btn-row {
+      position: absolute;
+      margin-top: 20px;
+      bottom: 10px;
+      width: 100%;
+      display: flex;
+      @include paddingX(1.5rem, 1.5rem);
+      justify-content: space-between;
+      @include for-phones {
+        width: calc(100% - 30px);
+        max-width: 300px;
+        bottom: 35px;
+        @include marginX(auto, auto);
+      }
+    }
   }
 }

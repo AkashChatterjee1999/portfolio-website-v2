@@ -10,25 +10,6 @@ class MyProjectCard extends React.Component {
   }
   render() {
     return (
-      // <Card className="bg-red" style={{ minHeight: "250px" }}>
-      //   <CardBody>
-      //     <CardTitle tag="h5">{this.props.name}</CardTitle>
-      //     <CardSubtitle tag="h6" className="mb-2">
-      //       {this.props.description}
-      //     </CardSubtitle>
-      //     <CardText>{this.props.longDescription}</CardText>
-      //   </CardBody>
-      //   <CardFooter>
-      //     {this.props.repoLink ? (
-      //       <Button className="d-flex bg-white">
-      //         <Code color="black" strokeWidth={"3px"} />
-      //         <a href={this.props.repoLink} className="ml-2" style={{ textDecoration: "none", color: "black" }}>
-      //           Code
-      //         </a>
-      //       </Button>
-      //     ) : null}
-      //   </CardFooter>
-      // </Card>
       <Container
         className="bg-red py-3 px-0"
         fluid
@@ -58,25 +39,25 @@ class MyProjectCard extends React.Component {
           <h2 style={{ fontSize: "16px" }}>{this.props.name}</h2>
           <p style={{ fontSize: "12px" }}>{this.props.description}</p>
           <br />
-          <Row className="d-flex px-3 justify-content-between">
-            {this.props.liveLink ? (
-              <Button className="d-flex bg-white" style={{ border: "none" }}>
-                <Airplay color="black" strokeWidth={"3px"} size="18px" />
-                <a href={this.props.liveLink} className="ml-2" style={{ textDecoration: "none", color: "black", fontSize: "12px" }}>
-                  View Live
-                </a>
-              </Button>
-            ) : null}
-            {this.props.repoLink ? (
-              <Button className="d-flex bg-white" style={{ border: "none" }}>
-                <Code color="black" strokeWidth={"3px"} size="18px" />
-                <a href={this.props.repoLink} className="ml-2" style={{ textDecoration: "none", color: "black", fontSize: "12px" }}>
-                  Code
-                </a>
-              </Button>
-            ) : null}
-          </Row>
         </Container>
+        <Row className="project-card-btn-row">
+          {this.props.liveLink ? (
+            <Button className="d-flex bg-white" style={{ border: "none" }}>
+              <Airplay color="black" strokeWidth={"3px"} size="18px" />
+              <a href={this.props.liveLink} className="ml-2" style={{ textDecoration: "none", color: "black", fontSize: "12px" }}>
+                View Live
+              </a>
+            </Button>
+          ) : null}
+          {this.props.repoLink ? (
+            <Button className="d-flex bg-white" style={{ border: "none" }}>
+              <Code color="black" strokeWidth={"3px"} size="18px" />
+              <a href={this.props.repoLink} className="ml-2" style={{ textDecoration: "none", color: "black", fontSize: "12px" }}>
+                Code
+              </a>
+            </Button>
+          ) : null}
+        </Row>
       </Container>
     );
   }
