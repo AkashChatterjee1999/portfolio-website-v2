@@ -21,6 +21,15 @@ class GetInTouch extends React.Component {
       selectedReason: "",
       snackBarOpen: false,
     };
+    this.nameInputRef = React.createRef();
+    this.emailInputRef = React.createRef();
+    this.commentInputRef = React.createRef();
+    this.reasonInputRef = React.createRef();
+
+    this.nameInputRef1 = React.createRef();
+    this.emailInputRef1 = React.createRef();
+    this.commentInputRef1 = React.createRef();
+    this.reasonInputRef1 = React.createRef();
   }
   render() {
     return (
@@ -61,6 +70,9 @@ class GetInTouch extends React.Component {
                   label="Your Name"
                   type="text"
                   variant="standard"
+                  inputRef={(el) => {
+                    this.nameInputRef = el;
+                  }}
                   sx={{
                     width: "200px",
                     maxWidth: "200px",
@@ -87,6 +99,9 @@ class GetInTouch extends React.Component {
                   type="email"
                   variant="standard"
                   className="w-50"
+                  inputRef={(el) => {
+                    this.emailInputRef = el;
+                  }}
                   sx={{
                     "& .MuiInputBase-root": {
                       color: "white",
@@ -111,6 +126,9 @@ class GetInTouch extends React.Component {
                 <TextField
                   id="outlined-multiline-static"
                   label="Your comment"
+                  inputRef={(el) => {
+                    this.commentInputRef = el;
+                  }}
                   multiline
                   rows={3}
                   className="w-50"
@@ -139,6 +157,9 @@ class GetInTouch extends React.Component {
                     <TextField
                       {...params}
                       label="Reason"
+                      inputRef={(el) => {
+                        this.reasonInputRef = el;
+                      }}
                       variant="standard"
                       sx={{
                         "& .MuiInputBase-root": {
@@ -161,10 +182,26 @@ class GetInTouch extends React.Component {
                 <Button
                   variant="contained"
                   className="d-block bottom-btn-text-color"
+                  disabled={
+                    this.nameInputRef.value !== "" &&
+                    this.reasonInputRef.value !== "" &&
+                    this.commentInputRef.value !== "" &&
+                    this.emailInputRef.value !== ""
+                      ? true
+                      : false
+                  }
                   sx={{
                     background: "white",
                   }}
-                  onClick={(e) => this.setState({ snackBarOpen: true })}>
+                  onClick={(e) => {
+                    this.setState({ snackBarOpen: true }, () => {
+                      console.log(this.nameInputRef);
+                      this.nameInputRef.value = "";
+                      this.reasonInputRef.value = "";
+                      this.commentInputRef.value = "";
+                      this.emailInputRef.value = "";
+                    });
+                  }}>
                   Submit
                 </Button>
               </div>
@@ -218,10 +255,11 @@ class GetInTouch extends React.Component {
               label="Your Name"
               type="text"
               variant="standard"
-              className="my-2"
+              className="w-100 my-2"
+              inputRef={(el) => {
+                this.nameInputRef1 = el;
+              }}
               sx={{
-                width: "200px",
-                maxWidth: "200px",
                 "& .MuiInputBase-root": {
                   color: "white",
                 },
@@ -246,6 +284,9 @@ class GetInTouch extends React.Component {
               type="email"
               variant="standard"
               className="w-100 my-2"
+              inputRef={(el) => {
+                this.emailInputRef1 = el;
+              }}
               sx={{
                 "& .MuiInputBase-root": {
                   color: "white",
@@ -270,6 +311,9 @@ class GetInTouch extends React.Component {
               label="Your comment"
               className="w-100 my-2"
               multiline
+              inputRef={(el) => {
+                this.commentInputRef1 = el;
+              }}
               rows={3}
               sx={{
                 "& .MuiInputBase-root": {
@@ -295,6 +339,9 @@ class GetInTouch extends React.Component {
                   {...params}
                   label="Reason"
                   variant="standard"
+                  inputRef={(el) => {
+                    this.reasonInputRef1 = el;
+                  }}
                   sx={{
                     "& .MuiInputBase-root": {
                       color: "white",
@@ -313,12 +360,27 @@ class GetInTouch extends React.Component {
             <br />
             <div className="m-auto" style={{ width: "max-content", height: "max-content" }}>
               <Button
+                disabled={
+                  this.nameInputRef1.value !== "" &&
+                  this.reasonInputRef1.value !== "" &&
+                  this.commentInputRef1.value !== "" &&
+                  this.emailInputRef1.value !== ""
+                    ? true
+                    : false
+                }
                 variant="contained"
                 className="d-block bottom-btn-text-color"
                 sx={{
                   background: "white",
                 }}
-                onClick={(e) => this.setState({ snackBarOpen: true })}>
+                onClick={(e) => {
+                  this.setState({ snackBarOpen: true }, () => {
+                    this.nameInputRef1.value = "";
+                    this.reasonInputRef1.value = "";
+                    this.commentInputRef1.value = "";
+                    this.emailInputRef1.value = "";
+                  });
+                }}>
                 Submit
               </Button>
             </div>
