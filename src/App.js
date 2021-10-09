@@ -9,14 +9,14 @@ import GetInTouch from "./pages/GetInTouch";
 function App() {
   return (
     <>
-      {/* <Home />
+      <Home />
       <hr className="m-0" style={{ height: "1px", backgroundColor: "transparent", border: "2px solid" }} />
       <AboutMe />
       <hr className="m-0" style={{ height: "1px", backgroundColor: "transparent", border: "2px solid" }} />
       <MyExperience />
       <hr className="m-0" style={{ height: "1px", backgroundColor: "transparent", border: "2px solid" }} />
       <MyProjects />
-      <hr className="m-0" style={{ height: "1px", backgroundColor: "transparent", border: "2px solid" }} /> */}
+      <hr className="m-0" style={{ height: "1px", backgroundColor: "transparent", border: "2px solid" }} />
       <GetInTouch />
     </>
   );

@@ -1,56 +1,350 @@
 import React from "react";
 import "./styles/getInTouch.scss";
 import { Container, Row, Col } from "reactstrap";
-import { Mail, MapPin, Phone } from "react-feather";
+import { Mail, MapPin, Phone, X } from "react-feather";
+import SocialIconsRow from "./ui-elements/socialIcons";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import Autocomplete from "@mui/material/Autocomplete";
+import Snackbar from "@mui/material/Snackbar";
+import IconButton from "@mui/material/IconButton";
+
+const defaultProps = {
+  options: ["Freelance Projects", "Just Interacting", "Other"],
+  getOptionLabel: (option) => option,
+};
 
 class GetInTouch extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      selectedReason: "",
+      snackBarOpen: false,
+    };
   }
   render() {
     return (
       <section className="get-in-touch">
-        <Container fluid className="display-not-on-phone">
+        <Container fluid className="display-not-on-phone d-flex">
           <Col md={5} className="p-3 d-flex flex-column p-4">
             <h3>Get In Touch</h3>
             <p style={{ fontSize: "14px", maxWidth: "500px" }}>
               Hi Friend,i am eager to get in touch with you, please fill this short form so that you cantact me for any Freelance projects
             </p>
-            <Col sm={8} className="mx-auto my-3">
-              <Row className="my-3">
-                <div style={{ height: "max-content", width: "max-content" }}>
-                  <Phone />
-                </div>
-                <p className="mx-3" style={{ fontSize: "13px" }}>
+            <div className="mx-auto d-flex flex-column my-3" style={{ maxWidth: "300px" }}>
+              <Row className="px-3 my-2 d-flex">
+                <Phone className="my-auto" />
+                <p className="my-auto mx-3" style={{ fontSize: "13px" }}>
                   +91-8768559623
                 </p>
               </Row>
-              <Row className="my-3">
-                <div style={{ height: "max-content", width: "max-content" }}>
-                  <Mail />
-                </div>
-                <p className="mx-3" style={{ fontSize: "13px" }}>
+              <Row className="px-3 my-2 d-flex">
+                <Mail className="my-auto" />
+                <p className="my-auto mx-3" style={{ fontSize: "13px" }}>
                   akashchatterjee1000@gmail.com
                 </p>
               </Row>
-              <Row className="my-3">
-                <div style={{ height: "max-content", width: "max-content" }}>
-                  <MapPin />
-                </div>
-                <p className="mx-3" style={{ fontSize: "13px" }}>
+              <Row className="px-3 my-2 d-flex">
+                <MapPin className="my-auto" />
+                <p className="my-auto mx-3" style={{ fontSize: "13px" }}>
                   Durgapur, WB, India
                 </p>
               </Row>
-            </Col>
-            <br />
-            <br />
-            <br />
-            <br />
-            <Row></Row>
+            </div>
+            <SocialIconsRow />
           </Col>
-          <Col md={7}></Col>
+          <Col md={7} className="d-flex flex-column">
+            <Container className="m-auto p-3 bg-red" style={{ borderRadius: "20px", maxWidth: "650px" }}>
+              <div className="d-flex justify-content-between px-3">
+                <TextField
+                  id="filled-name"
+                  label="Your Name"
+                  type="text"
+                  variant="standard"
+                  sx={{
+                    width: "200px",
+                    maxWidth: "200px",
+                    "& .MuiInputBase-root": {
+                      color: "white",
+                    },
+                    "& label": {
+                      color: "#fff",
+                    },
+                    "& label.Mui-focused": {
+                      color: "#fff",
+                    },
+                    "& .MuiInput-underline:after": {
+                      borderBottomColor: "#fff",
+                    },
+                    "& .MuiInput-underline:before": {
+                      borderBottomColor: "#fff",
+                    },
+                  }}
+                />
+                <TextField
+                  id="filled-email"
+                  label="Email id"
+                  type="email"
+                  variant="standard"
+                  className="w-50"
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      color: "white",
+                    },
+                    "& label": {
+                      color: "#fff",
+                    },
+                    "& label.Mui-focused": {
+                      color: "#fff",
+                    },
+                    "& .MuiInput-underline:after": {
+                      borderBottomColor: "#fff",
+                    },
+                    "& .MuiInput-underline:before": {
+                      borderBottomColor: "#fff",
+                    },
+                  }}
+                />
+              </div>
+              <br />
+              <div className="d-flex justify-content-between px-3">
+                <TextField
+                  id="outlined-multiline-static"
+                  label="Your comment"
+                  multiline
+                  rows={3}
+                  className="w-50"
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      color: "white",
+                      borderColor: "white",
+                    },
+                    "& label": {
+                      color: "#fff",
+                    },
+                    "& label.Mui-focused": {
+                      color: "#fff",
+                    },
+                  }}
+                />
+                <Autocomplete
+                  {...defaultProps}
+                  sx={{
+                    width: "200px",
+                    maxWidth: "200px",
+                  }}
+                  id="disable-close-on-select"
+                  onChange={(e) => this.setState({ selectedReason: e.target.innerText })}
+                  renderInput={(params) => (
+                    <TextField
+                      {...params}
+                      label="Reason"
+                      variant="standard"
+                      sx={{
+                        "& .MuiInputBase-root": {
+                          color: "white",
+                          borderColor: "white",
+                        },
+                        "& label": {
+                          color: "#fff",
+                        },
+                        "& label.Mui-focused": {
+                          color: "#fff",
+                        },
+                      }}
+                    />
+                  )}
+                />
+              </div>
+              <br />
+              <div className="m-auto" style={{ width: "max-content", height: "max-content" }}>
+                <Button
+                  variant="contained"
+                  className="d-block bottom-btn-text-color"
+                  sx={{
+                    background: "white",
+                  }}
+                  onClick={(e) => this.setState({ snackBarOpen: true })}>
+                  Submit
+                </Button>
+              </div>
+            </Container>
+          </Col>
+          <Snackbar
+            open={this.state.snackBarOpen}
+            autoHideDuration={6000}
+            onClose={(e) => this.setState({ snackBarOpen: false })}
+            message={"Thanks for connecting!"}
+            action={
+              <React.Fragment>
+                <IconButton aria-label="close" color="inherit" sx={{ p: 0.5 }} onClick={(e) => this.setState({ snackBarOpen: false })}>
+                  <X />
+                </IconButton>
+              </React.Fragment>
+            }
+          />
         </Container>
+
+        <Container fluid className="display-on-phone d-flex flex-column">
+          <Col md={5} className="p-3 d-flex flex-column p-4">
+            <h3>Get In Touch</h3>
+            <p style={{ fontSize: "14px", maxWidth: "500px" }}>
+              Hi Friend,i am eager to get in touch with you, please fill this short form so that you cantact me for any Freelance projects
+            </p>
+            <div className="mx-auto d-flex flex-column my-3" style={{ maxWidth: "300px" }}>
+              <Row className="px-3 my-2 d-flex">
+                <Phone className="my-auto" />
+                <p className="my-auto mx-3" style={{ fontSize: "13px" }}>
+                  +91-8768559623
+                </p>
+              </Row>
+              <Row className="px-3 my-2 d-flex">
+                <Mail className="my-auto" />
+                <p className="my-auto mx-3" style={{ fontSize: "13px" }}>
+                  akashchatterjee1000@gmail.com
+                </p>
+              </Row>
+              <Row className="px-3 my-2 d-flex">
+                <MapPin className="my-auto" />
+                <p className="my-auto mx-3" style={{ fontSize: "13px" }}>
+                  Durgapur, WB, India
+                </p>
+              </Row>
+            </div>
+          </Col>
+          <Container className="m-auto p-3 bg-red" style={{ borderRadius: "20px", maxWidth: "650px" }}>
+            <TextField
+              id="filled-name"
+              label="Your Name"
+              type="text"
+              variant="standard"
+              className="my-2"
+              sx={{
+                width: "200px",
+                maxWidth: "200px",
+                "& .MuiInputBase-root": {
+                  color: "white",
+                },
+                "& label": {
+                  color: "#fff",
+                },
+                "& label.Mui-focused": {
+                  color: "#fff",
+                },
+                "& .MuiInput-underline:after": {
+                  borderBottomColor: "#fff",
+                },
+                "& .MuiInput-underline:before": {
+                  borderBottomColor: "#fff",
+                },
+              }}
+            />
+            <br />
+            <TextField
+              id="filled-email"
+              label="Email id"
+              type="email"
+              variant="standard"
+              className="w-100 my-2"
+              sx={{
+                "& .MuiInputBase-root": {
+                  color: "white",
+                },
+                "& label": {
+                  color: "#fff",
+                },
+                "& label.Mui-focused": {
+                  color: "#fff",
+                },
+                "& .MuiInput-underline:after": {
+                  borderBottomColor: "#fff",
+                },
+                "& .MuiInput-underline:before": {
+                  borderBottomColor: "#fff",
+                },
+              }}
+            />
+            <br />
+            <TextField
+              id="outlined-multiline-static"
+              label="Your comment"
+              className="w-100 my-2"
+              multiline
+              rows={3}
+              sx={{
+                "& .MuiInputBase-root": {
+                  color: "white",
+                  borderColor: "white",
+                },
+                "& label": {
+                  color: "#fff",
+                },
+                "& label.Mui-focused": {
+                  color: "#fff",
+                },
+              }}
+            />
+            <br />
+            <Autocomplete
+              {...defaultProps}
+              id="disable-close-on-select"
+              className="w-100 my-2"
+              onChange={(e) => this.setState({ selectedReason: e.target.innerText })}
+              renderInput={(params) => (
+                <TextField
+                  {...params}
+                  label="Reason"
+                  variant="standard"
+                  sx={{
+                    "& .MuiInputBase-root": {
+                      color: "white",
+                      borderColor: "white",
+                    },
+                    "& label": {
+                      color: "#fff",
+                    },
+                    "& label.Mui-focused": {
+                      color: "#fff",
+                    },
+                  }}
+                />
+              )}
+            />
+            <br />
+            <div className="m-auto" style={{ width: "max-content", height: "max-content" }}>
+              <Button
+                variant="contained"
+                className="d-block bottom-btn-text-color"
+                sx={{
+                  background: "white",
+                }}
+                onClick={(e) => this.setState({ snackBarOpen: true })}>
+                Submit
+              </Button>
+            </div>
+          </Container>
+          <Snackbar
+            open={this.state.snackBarOpen}
+            autoHideDuration={6000}
+            onClose={(e) => this.setState({ snackBarOpen: false })}
+            message={"Thanks for connecting!"}
+            action={
+              <React.Fragment>
+                <IconButton aria-label="close" color="inherit" sx={{ p: 0.5 }} onClick={(e) => this.setState({ snackBarOpen: false })}>
+                  <X />
+                </IconButton>
+              </React.Fragment>
+            }
+          />
+          <p className="my-3" style={{ fontWeight: 400, fontSize: "12px" }}>
+            Please do connect with me from the above links and do checkout thgem. It will be appreciated if you want to send me a personalized message
+            from the in-site mailer
+          </p>
+          <SocialIconsRow className="my-3 mx-auto" />
+        </Container>
+        <p style={{ fontWeight: 600, fontSize: "16px", width: "max-content" }} className="ml-auto mx-5">
+          crafted by @Akash Chatterjee, 2021
+        </p>
       </section>
     );
   }

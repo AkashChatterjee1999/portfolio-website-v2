@@ -6,4 +6,9 @@
   display: block;
   color: white;
   overflow-x: hidden;
+  @include paddingY(40px, 40px);
+}
+
+.bottom-btn-text-color {
+  color: #f23d4b !important;
 }
