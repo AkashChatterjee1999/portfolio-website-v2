@@ -31,6 +31,51 @@ class GetInTouch extends React.Component {
     this.commentInputRef1 = React.createRef();
     this.reasonInputRef1 = React.createRef();
   }
+
+  encode = (data) => {
+    return Object.keys(data)
+      .map((key) => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&");
+  };
+
+  handleMobileFormSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ snackBarOpen: true });
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: this.encode({
+        "form-name": "Get-in-Touch (Mobile)",
+        name: this.nameInputRef1.value,
+        email: this.emailInputRef1.value,
+        comment: this.commentInputRef1.value,
+        reason: this.reasonInputRef1.value,
+      }),
+    })
+      .then(() => setTimeout((window.location.href = "/"), 4000))
+      .catch((error) => alert(error));
+  };
+
+  handleFormSubmit = (e) => {
+    e.preventDefault();
+    this.setState({ snackBarOpen: true });
+
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: this.encode({
+        "form-name": "Get-in-Touch (Desktop)",
+        name: this.nameInputRef.value,
+        email: this.emailInputRef.value,
+        comment: this.commentInputRef.value,
+        reason: this.reasonInputRef.value,
+      }),
+    })
+      .then(() => setTimeout((window.location.href = "/"), 4000))
+      .catch((error) => alert(error));
+  };
+
   render() {
     return (
       <section className="get-in-touch">
@@ -64,147 +109,147 @@ class GetInTouch extends React.Component {
           </Col>
           <Col md={7} className="d-flex flex-column">
             <Container className="m-auto p-3 bg-red" style={{ borderRadius: "20px", maxWidth: "650px" }}>
-              <div className="d-flex justify-content-between px-3">
-                <TextField
-                  id="filled-name"
-                  label="Your Name"
-                  type="text"
-                  variant="standard"
-                  inputRef={(el) => {
-                    this.nameInputRef = el;
-                  }}
-                  sx={{
-                    width: "200px",
-                    maxWidth: "200px",
-                    "& .MuiInputBase-root": {
-                      color: "white",
-                    },
-                    "& label": {
-                      color: "#fff",
-                    },
-                    "& label.Mui-focused": {
-                      color: "#fff",
-                    },
-                    "& .MuiInput-underline:after": {
-                      borderBottomColor: "#fff",
-                    },
-                    "& .MuiInput-underline:before": {
-                      borderBottomColor: "#fff",
-                    },
-                  }}
-                />
-                <TextField
-                  id="filled-email"
-                  label="Email id"
-                  type="email"
-                  variant="standard"
-                  className="w-50"
-                  inputRef={(el) => {
-                    this.emailInputRef = el;
-                  }}
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      color: "white",
-                    },
-                    "& label": {
-                      color: "#fff",
-                    },
-                    "& label.Mui-focused": {
-                      color: "#fff",
-                    },
-                    "& .MuiInput-underline:after": {
-                      borderBottomColor: "#fff",
-                    },
-                    "& .MuiInput-underline:before": {
-                      borderBottomColor: "#fff",
-                    },
-                  }}
-                />
-              </div>
-              <br />
-              <div className="d-flex justify-content-between px-3">
-                <TextField
-                  id="outlined-multiline-static"
-                  label="Your comment"
-                  inputRef={(el) => {
-                    this.commentInputRef = el;
-                  }}
-                  multiline
-                  rows={3}
-                  className="w-50"
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      color: "white",
-                      borderColor: "white",
-                    },
-                    "& label": {
-                      color: "#fff",
-                    },
-                    "& label.Mui-focused": {
-                      color: "#fff",
-                    },
-                  }}
-                />
-                <Autocomplete
-                  {...defaultProps}
-                  sx={{
-                    width: "200px",
-                    maxWidth: "200px",
-                  }}
-                  id="disable-close-on-select"
-                  onChange={(e) => this.setState({ selectedReason: e.target.innerText })}
-                  renderInput={(params) => (
-                    <TextField
-                      {...params}
-                      label="Reason"
-                      inputRef={(el) => {
-                        this.reasonInputRef = el;
-                      }}
-                      variant="standard"
-                      sx={{
-                        "& .MuiInputBase-root": {
-                          color: "white",
-                          borderColor: "white",
-                        },
-                        "& label": {
-                          color: "#fff",
-                        },
-                        "& label.Mui-focused": {
-                          color: "#fff",
-                        },
-                      }}
-                    />
-                  )}
-                />
-              </div>
-              <br />
-              <div className="m-auto" style={{ width: "max-content", height: "max-content" }}>
-                <Button
-                  variant="contained"
-                  className="d-block bottom-btn-text-color"
-                  disabled={
-                    this.nameInputRef.value !== "" &&
-                    this.reasonInputRef.value !== "" &&
-                    this.commentInputRef.value !== "" &&
-                    this.emailInputRef.value !== ""
-                      ? true
-                      : false
-                  }
-                  sx={{
-                    background: "white",
-                  }}
-                  onClick={(e) => {
-                    this.setState({ snackBarOpen: true }, () => {
-                      console.log(this.nameInputRef);
-                      this.nameInputRef.value = "";
-                      this.reasonInputRef.value = "";
-                      this.commentInputRef.value = "";
-                      this.emailInputRef.value = "";
-                    });
-                  }}>
-                  Submit
-                </Button>
-              </div>
+              <form data-netlify="true" name="contactForm" method="post" onSubmit={this.handleFormSubmit}>
+                <div className="d-flex justify-content-between px-3">
+                  <TextField
+                    id="filled-name"
+                    label="Your Name"
+                    type="text"
+                    variant="standard"
+                    required
+                    minlength="3"
+                    inputRef={(el) => {
+                      this.nameInputRef = el;
+                    }}
+                    sx={{
+                      width: "200px",
+                      maxWidth: "200px",
+                      "& .MuiInputBase-root": {
+                        color: "white",
+                      },
+                      "& label": {
+                        color: "#fff",
+                      },
+                      "& label.Mui-focused": {
+                        color: "#fff",
+                      },
+                      "& .MuiInput-underline:after": {
+                        borderBottomColor: "#fff",
+                      },
+                      "& .MuiInput-underline:before": {
+                        borderBottomColor: "#fff",
+                      },
+                    }}
+                  />
+                  <TextField
+                    id="filled-email"
+                    label="Email id"
+                    type="email"
+                    variant="standard"
+                    required
+                    className="w-50"
+                    inputRef={(el) => {
+                      this.emailInputRef = el;
+                    }}
+                    sx={{
+                      "& .MuiInputBase-root": {
+                        color: "white",
+                      },
+                      "& label": {
+                        color: "#fff",
+                      },
+                      "& label.Mui-focused": {
+                        color: "#fff",
+                      },
+                      "& .MuiInput-underline:after": {
+                        borderBottomColor: "#fff",
+                      },
+                      "& .MuiInput-underline:before": {
+                        borderBottomColor: "#fff",
+                      },
+                    }}
+                  />
+                </div>
+                <br />
+                <div className="d-flex justify-content-between px-3">
+                  <TextField
+                    id="outlined-multiline-static"
+                    label="Your comment"
+                    inputRef={(el) => {
+                      this.commentInputRef = el;
+                    }}
+                    multiline
+                    required
+                    minlength="10"
+                    rows={3}
+                    className="w-50"
+                    sx={{
+                      "& .MuiInputBase-root": {
+                        color: "white",
+                        borderColor: "white",
+                      },
+                      "& label": {
+                        color: "#fff",
+                      },
+                      "& label.Mui-focused": {
+                        color: "#fff",
+                      },
+                    }}
+                  />
+                  <Autocomplete
+                    {...defaultProps}
+                    sx={{
+                      width: "200px",
+                      maxWidth: "200px",
+                    }}
+                    id="disable-close-on-select"
+                    onChange={(e) => this.setState({ selectedReason: e.target.innerText })}
+                    renderInput={(params) => (
+                      <TextField
+                        {...params}
+                        label="Reason"
+                        inputRef={(el) => {
+                          this.reasonInputRef = el;
+                        }}
+                        required
+                        variant="standard"
+                        sx={{
+                          "& .MuiInputBase-root": {
+                            color: "white",
+                            borderColor: "white",
+                          },
+                          "& label": {
+                            color: "#fff",
+                          },
+                          "& label.Mui-focused": {
+                            color: "#fff",
+                          },
+                        }}
+                      />
+                    )}
+                  />
+                </div>
+                <br />
+                <div className="m-auto" style={{ width: "max-content", height: "max-content" }}>
+                  <Button
+                    variant="contained"
+                    type="submit"
+                    className="d-block bottom-btn-text-color"
+                    disabled={
+                      this.nameInputRef.value !== "" &&
+                      this.reasonInputRef.value !== "" &&
+                      this.commentInputRef.value !== "" &&
+                      this.emailInputRef.value !== ""
+                        ? true
+                        : false
+                    }
+                    sx={{
+                      background: "white",
+                    }}>
+                    Submit
+                  </Button>
+                </div>
+              </form>
             </Container>
           </Col>
           <Snackbar
@@ -250,140 +295,141 @@ class GetInTouch extends React.Component {
             </div>
           </Col>
           <Container className="m-auto p-3 bg-red" style={{ borderRadius: "20px", maxWidth: "650px" }}>
-            <TextField
-              id="filled-name"
-              label="Your Name"
-              type="text"
-              variant="standard"
-              className="w-100 my-2"
-              inputRef={(el) => {
-                this.nameInputRef1 = el;
-              }}
-              sx={{
-                "& .MuiInputBase-root": {
-                  color: "white",
-                },
-                "& label": {
-                  color: "#fff",
-                },
-                "& label.Mui-focused": {
-                  color: "#fff",
-                },
-                "& .MuiInput-underline:after": {
-                  borderBottomColor: "#fff",
-                },
-                "& .MuiInput-underline:before": {
-                  borderBottomColor: "#fff",
-                },
-              }}
-            />
-            <br />
-            <TextField
-              id="filled-email"
-              label="Email id"
-              type="email"
-              variant="standard"
-              className="w-100 my-2"
-              inputRef={(el) => {
-                this.emailInputRef1 = el;
-              }}
-              sx={{
-                "& .MuiInputBase-root": {
-                  color: "white",
-                },
-                "& label": {
-                  color: "#fff",
-                },
-                "& label.Mui-focused": {
-                  color: "#fff",
-                },
-                "& .MuiInput-underline:after": {
-                  borderBottomColor: "#fff",
-                },
-                "& .MuiInput-underline:before": {
-                  borderBottomColor: "#fff",
-                },
-              }}
-            />
-            <br />
-            <TextField
-              id="outlined-multiline-static"
-              label="Your comment"
-              className="w-100 my-2"
-              multiline
-              inputRef={(el) => {
-                this.commentInputRef1 = el;
-              }}
-              rows={3}
-              sx={{
-                "& .MuiInputBase-root": {
-                  color: "white",
-                  borderColor: "white",
-                },
-                "& label": {
-                  color: "#fff",
-                },
-                "& label.Mui-focused": {
-                  color: "#fff",
-                },
-              }}
-            />
-            <br />
-            <Autocomplete
-              {...defaultProps}
-              id="disable-close-on-select"
-              className="w-100 my-2"
-              onChange={(e) => this.setState({ selectedReason: e.target.innerText })}
-              renderInput={(params) => (
-                <TextField
-                  {...params}
-                  label="Reason"
-                  variant="standard"
-                  inputRef={(el) => {
-                    this.reasonInputRef1 = el;
-                  }}
-                  sx={{
-                    "& .MuiInputBase-root": {
-                      color: "white",
-                      borderColor: "white",
-                    },
-                    "& label": {
-                      color: "#fff",
-                    },
-                    "& label.Mui-focused": {
-                      color: "#fff",
-                    },
-                  }}
-                />
-              )}
-            />
-            <br />
-            <div className="m-auto" style={{ width: "max-content", height: "max-content" }}>
-              <Button
-                disabled={
-                  this.nameInputRef1.value !== "" &&
-                  this.reasonInputRef1.value !== "" &&
-                  this.commentInputRef1.value !== "" &&
-                  this.emailInputRef1.value !== ""
-                    ? true
-                    : false
-                }
-                variant="contained"
-                className="d-block bottom-btn-text-color"
-                sx={{
-                  background: "white",
+            <form data-netlify="true" name="contactForm" method="post" onSubmit={this.handleMobileFormSubmit}>
+              <TextField
+                id="filled-name"
+                label="Your Name"
+                type="text"
+                minlength="3"
+                required
+                variant="standard"
+                className="w-100 my-2"
+                inputRef={(el) => {
+                  this.nameInputRef1 = el;
                 }}
-                onClick={(e) => {
-                  this.setState({ snackBarOpen: true }, () => {
-                    this.nameInputRef1.value = "";
-                    this.reasonInputRef1.value = "";
-                    this.commentInputRef1.value = "";
-                    this.emailInputRef1.value = "";
-                  });
-                }}>
-                Submit
-              </Button>
-            </div>
+                sx={{
+                  "& .MuiInputBase-root": {
+                    color: "white",
+                  },
+                  "& label": {
+                    color: "#fff",
+                  },
+                  "& label.Mui-focused": {
+                    color: "#fff",
+                  },
+                  "& .MuiInput-underline:after": {
+                    borderBottomColor: "#fff",
+                  },
+                  "& .MuiInput-underline:before": {
+                    borderBottomColor: "#fff",
+                  },
+                }}
+              />
+              <br />
+              <TextField
+                id="filled-email"
+                label="Email id"
+                type="email"
+                variant="standard"
+                required
+                className="w-100 my-2"
+                inputRef={(el) => {
+                  this.emailInputRef1 = el;
+                }}
+                sx={{
+                  "& .MuiInputBase-root": {
+                    color: "white",
+                  },
+                  "& label": {
+                    color: "#fff",
+                  },
+                  "& label.Mui-focused": {
+                    color: "#fff",
+                  },
+                  "& .MuiInput-underline:after": {
+                    borderBottomColor: "#fff",
+                  },
+                  "& .MuiInput-underline:before": {
+                    borderBottomColor: "#fff",
+                  },
+                }}
+              />
+              <br />
+              <TextField
+                id="outlined-multiline-static"
+                label="Your comment"
+                className="w-100 my-2"
+                multiline
+                required
+                minlength="10"
+                inputRef={(el) => {
+                  this.commentInputRef1 = el;
+                }}
+                rows={3}
+                sx={{
+                  "& .MuiInputBase-root": {
+                    color: "white",
+                    borderColor: "white",
+                  },
+                  "& label": {
+                    color: "#fff",
+                  },
+                  "& label.Mui-focused": {
+                    color: "#fff",
+                  },
+                }}
+              />
+              <br />
+              <Autocomplete
+                {...defaultProps}
+                id="disable-close-on-select"
+                className="w-100 my-2"
+                onChange={(e) => this.setState({ selectedReason: e.target.innerText })}
+                renderInput={(params) => (
+                  <TextField
+                    {...params}
+                    label="Reason"
+                    variant="standard"
+                    required
+                    inputRef={(el) => {
+                      this.reasonInputRef1 = el;
+                    }}
+                    sx={{
+                      "& .MuiInputBase-root": {
+                        color: "white",
+                        borderColor: "white",
+                      },
+                      "& label": {
+                        color: "#fff",
+                      },
+                      "& label.Mui-focused": {
+                        color: "#fff",
+                      },
+                    }}
+                  />
+                )}
+              />
+              <br />
+              <div className="m-auto" style={{ width: "max-content", height: "max-content" }}>
+                <Button
+                  type="submit"
+                  disabled={
+                    this.nameInputRef1.value !== "" &&
+                    this.reasonInputRef1.value !== "" &&
+                    this.commentInputRef1.value !== "" &&
+                    this.emailInputRef1.value !== ""
+                      ? true
+                      : false
+                  }
+                  variant="contained"
+                  className="d-block bottom-btn-text-color"
+                  sx={{
+                    background: "white",
+                  }}>
+                  Submit
+                </Button>
+              </div>
+            </form>
           </Container>
           <Snackbar
             open={this.state.snackBarOpen}
