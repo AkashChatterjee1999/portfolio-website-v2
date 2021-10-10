@@ -109,7 +109,7 @@ class GetInTouch extends React.Component {
           </Col>
           <Col md={7} className="d-flex flex-column">
             <Container className="m-auto p-3 bg-red" style={{ borderRadius: "20px", maxWidth: "650px" }}>
-              <form netlify name="contactForm" method="post" onSubmit={this.handleFormSubmit}>
+              <form onSubmit={this.handleFormSubmit}>
                 <div className="d-flex justify-content-between px-3">
                   <TextField
                     id="filled-name"
@@ -295,7 +295,7 @@ class GetInTouch extends React.Component {
             </div>
           </Col>
           <Container className="m-auto p-3 bg-red" style={{ borderRadius: "20px", maxWidth: "650px" }}>
-            <form netlify name="contactForm" method="post" onSubmit={this.handleMobileFormSubmit}>
+            <form onSubmit={this.handleMobileFormSubmit}>
               <TextField
                 id="filled-name"
                 label="Your Name"
